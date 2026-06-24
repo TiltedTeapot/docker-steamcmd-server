@@ -51,6 +51,17 @@ else
 fi
 
 echo "---Prepare Server---"
+if [ ! -f ${DATA_DIR}/.steam/sdk64/steamclient.so ]; then
+    if [ ! -d ${DATA_DIR}/.steam ]; then
+    	mkdir ${DATA_DIR}/.steam
+    fi
+    if [ ! -d ${DATA_DIR}/.steam/sdk64 ]; then
+    	mkdir ${DATA_DIR}/.steam/sdk64
+    fi
+    cp -R ${STEAMCMD_DIR}/linux64/* ${DATA_DIR}/.steam/sdk64/
+    cp -R ${STEAMCMD_DIR}/linux64/* ${SERVER_DIR}
+fi
+
 if [ ! -f ${DATA_DIR}/.steam/sdk32/steamclient.so ]; then
 	if [ ! -d ${DATA_DIR}/.steam ]; then
     	mkdir ${DATA_DIR}/.steam
@@ -65,4 +76,4 @@ echo "---Server ready---"
 
 echo "---Start Server---"
 cd ${SERVER_DIR}
-${SERVER_DIR}/srcds_run -game ${GAME_NAME} ${GAME_PARAMS} -console +port ${GAME_PORT}
+./Puck.x86_64

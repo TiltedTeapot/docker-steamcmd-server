@@ -76,4 +76,4 @@ echo "---Server ready---"
 
 echo "---Start Server---"
 cd ${SERVER_DIR}
-./Puck.x86_64
+${SERVER_DIR}/Puck

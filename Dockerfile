@@ -1,4 +1,4 @@
-FROM ich777/debian-baseimage:bullseye_amd64
+FROM ich777/debian-baseimage:bookworm_amd64
 
 LABEL org.opencontainers.image.authors="tiltedteapot@gmail.com"
 LABEL org.opencontainers.image.source="http://github.com/TiltedTeapot/docker-steamcmd-server"

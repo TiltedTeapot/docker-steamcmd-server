@@ -114,4 +114,4 @@ echo "---Server ready---"
 
 echo "---Start Server---"
 cd ${SERVER_DIR}
-${SERVER_DIR}/Puck --serverConfigPath ${CONFIG}
+./start_server.sh --serverConfigPath ${CONFIG}

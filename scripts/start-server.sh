@@ -71,9 +71,47 @@ if [ ! -f ${DATA_DIR}/.steam/sdk32/steamclient.so ]; then
     fi
     cp -R ${STEAMCMD_DIR}/linux32/* ${DATA_DIR}/.steam/sdk32/
 fi
+
+if [ ! -f ${CONFIG} ]; then
+    jq << EOF > "${CONFIG}"
+    {
+        "port": 7777,
+        "pingPort": 7778,
+        "name": "My Puck Server",
+        "maxPlayers": 10,
+        "password": "",
+        "voip": false,
+        "isPublic": true,
+        "adminSteamIds": [],
+        "reloadBannedSteamIds": false,
+        "usePuckBannedSteamIds": true,
+        "printMetrics": true,
+        "kickTimeout": 300,
+        "sleepTimeout": 60,
+        "joinMidMatchDelay": 10,
+        "targetFrameRate": 120,
+        "serverTickRate": 100,
+        "clientTickRate": 200,
+        "startPaused": false,
+        "allowVoting": true,
+        "phaseDurationMap": {
+            "Warmup": 600,
+            "FaceOff": 3,
+            "Playing": 300,
+            "BlueScore": 5,
+            "RedScore": 5,
+            "Replay": 10,
+            "PeriodOver": 15,
+            "GameOver": 15
+        },
+        "mods": []
+    }
+EOF
+fi
+
 chmod -R ${DATA_PERM} ${DATA_DIR}
 echo "---Server ready---"
 
 echo "---Start Server---"
 cd ${SERVER_DIR}
-${SERVER_DIR}/Puck
+${SERVER_DIR}/Puck --serverConfigPath ${CONFIG}
